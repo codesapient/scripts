@@ -1,3 +1,4 @@
+
 function setTitleHeightSame(selector){
   var maxHeight = 0;
   $(selector).each(function(){
@@ -6,4 +7,6 @@ function setTitleHeightSame(selector){
   $(selector).height(maxHeight);
 }
 
-setTitleHeightSame(".product_title");
+$(document).ready(function(){
+	setTitleHeightSame(".product_title");
+})
