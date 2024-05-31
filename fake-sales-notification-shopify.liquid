@@ -1,0 +1,220 @@
+<div id="toast-container" style="position: fixed; bottom: 20px; left: 20px; z-index: 9999;"></div>
+<style>
+.toast {
+  display: flex;
+  align-items: center;
+  background-color: white;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 25px;
+  padding: 10px 20px;
+  margin-bottom: 10px;
+  max-width: 350px;
+  position: relative;
+  animation: fadeInOut 5s forwards;
+}
+
+.toast img {
+  width: 50px;
+  height: 50px;
+  border-radius: 10px;
+  margin-right: 10px;
+}
+
+.toast-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.toast-content p {
+  margin: 0;
+  font-size: 14px;
+}
+
+.toast-content .customer-info {
+  font-size: 12px;
+  color: gray;
+}
+
+.toast-content .product-name {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.toast-content .time {
+  font-size: 12px;
+  color: green;
+}
+
+.toast .close-icon {
+  cursor: pointer;
+  font-size: 16px;
+  color: #aaa;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+
+.toast .close-icon:hover {
+  color: #000;
+}
+
+@keyframes fadeInOut {
+  0%, 100% { opacity: 0; }
+  10%, 90% { opacity: 1; }
+}
+
+</style>
+<script>
+ function showToast(notification) {
+  const toastContainer = document.getElementById('toast-container');
+  
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  
+  toast.innerHTML = `
+    <img src="${notification.image}" alt="Product Image">
+    <div class="toast-content">
+      <p class="customer-info">${notification.customerName} in ${notification.location} purchased</p>
+      <p class="product-name">${notification.productName}</p>
+      <p class="time">${notification.time}</p>
+    </div>
+    <span class="close-icon" onclick="closeToast(this)">&#10005;</span>
+  `;
+  
+  toastContainer.appendChild(toast);
+  
+  setTimeout(() => {
+    toastContainer.removeChild(toast);
+  }, 5000);
+}
+  
+function closeToast(element) {
+  const toast = element.parentElement;
+  toast.style.opacity = 0;
+  setTimeout(() => {
+    if (toast.parentNode) {
+      toast.parentNode.removeChild(toast);
+    }
+  }, 600);
+}
+
+const notifications = [
+  {
+    image: 'https://cdn.shopify.com/s/files/1/0104/2264/8887/files/HerbalifeSustainableScoopforFormula1_ProteinDrinkMix.png?v=1715784407',
+    customerName: 'Sharon K.',
+    location: 'HEMEL HEMPSTEAD, United Kingdom',
+    productName: 'Herbalife Sustainable Scoop for Formula 1 & Protein Drink Mix',
+    time: '32 minute(s) ago'
+  },
+  {
+    image: 'https://cdn.shopify.com/s/files/1/0104/2264/8887/files/HerbalifeNutritionShakerSingle.png?v=1715784068',
+    customerName: 'John D.',
+    location: 'NEW YORK, USA',
+    productName: 'Herbalife Nutrition Shaker Single',
+    time: '15 minute(s) ago'
+  },
+  {
+    image: 'https://cdn.shopify.com/s/files/1/0104/2264/8887/files/NightModeChamomileandPeach180.jpg?v=1701677389',
+    customerName: 'Maria S.',
+    location: 'LONDON, United Kingdom',
+    productName: 'Night Mode Chamomile and Peach 180 g',
+    time: '10 minute(s) ago'
+  },
+  {
+    image: 'https://cdn.shopify.com/s/files/1/0104/2264/8887/products/cq5dam.web.800.800_370b9296-f9f6-4b14-9902-eb642d4f6685.jpg?v=1675269202',
+    customerName: 'Alex P.',
+    location: 'TORONTO, Canada',
+    productName: 'Herbalife Immune Booster - 21 Sachets',
+    time: '45 minute(s) ago'
+  },
+  {
+    image: 'https://cdn.shopify.com/s/files/1/0104/2264/8887/products/cq5dam.web.800.800.png?v=1670351288',
+    customerName: 'Emily R.',
+    location: 'SYDNEY, Australia',
+    productName: 'Herbalife Sports Bottle 750ml',
+    time: '50 minute(s) ago'
+  },
+  {
+    image: 'https://cdn.shopify.com/s/files/1/0104/2264/8887/products/cq5dam.web.800.800_1ce43738-8286-40c6-b626-03b4732f813d.jpg?v=1667823964',
+    customerName: 'Michael B.',
+    location: 'SAN FRANCISCO, USA',
+    productName: 'Herbalife Phyto Complete (60 tablets)',
+    time: '5 minute(s) ago'
+  },
+  {
+    image: 'https://cdn.shopify.com/s/files/1/0104/2264/8887/products/HerbalifeProteinBakeMix.jpg?v=1664536002',
+    customerName: 'Jessica T.',
+    location: 'MELBOURNE, Australia',
+    productName: 'Herbalife Protein Bake Mix - Limited Edition (480g)',
+    time: '25 minute(s) ago'
+  },
+  {
+    image: 'https://cdn.shopify.com/s/files/1/0104/2264/8887/products/Formula1SachetsSmoothChocolate.jpg?v=1663857972',
+    customerName: 'David L.',
+    location: 'DUBLIN, Ireland',
+    productName: 'Herbalife Formula 1 Shake - Pack of 7 Sachets',
+    time: '20 minute(s) ago'
+  },
+  {
+    image: 'https://cdn.shopify.com/s/files/1/0104/2264/8887/products/cq5dam.web.800.800_3e3287a2-9ece-4aa4-aacd-b01c65fd5af1.jpg?v=1632733502',
+    customerName: 'Linda W.',
+    location: 'AMSTERDAM, Netherlands',
+    productName: 'Herbalife LiftOff® Max Grapefruit Twist (10 Tablets)',
+    time: '30 minute(s) ago'
+  },
+  {
+    image: 'https://cdn.shopify.com/s/files/1/0104/2264/8887/products/cq5dam.web.800.800.jpg?v=1632733007',
+    customerName: 'James H.',
+    location: 'BERLIN, Germany',
+    productName: 'Herbalife Vegan Protein Drink Mix Vanilla (560g)',
+    time: '12 minute(s) ago'
+  },
+  {
+    image: 'https://cdn.shopify.com/s/files/1/0104/2264/8887/products/H24AchieveBarDarkChocolateMain.jpg?v=1630578083',
+    customerName: 'Sarah M.',
+    location: 'PARIS, France',
+    productName: 'Herbalife H24 Achieve Bar (6 x 60g bars per box)',
+    time: '18 minute(s) ago'
+  },
+  {
+    image: 'https://cdn.shopify.com/s/files/1/0104/2264/8887/products/Formula1SachetsSmoothChocolate.jpg?v=1663857972',
+    customerName: 'Daniel K.',
+    location: 'ROME, Italy',
+    productName: 'Herbalife Formula 1 Shake - Pack of 7 Sachets',
+    time: '40 minute(s) ago'
+  },
+  {
+    image: 'https://cdn.shopify.com/s/files/1/0104/2264/8887/products/HerbalifeProteinBakeMix.jpg?v=1664536002',
+    customerName: 'Sophia A.',
+    location: 'BARCELONA, Spain',
+    productName: 'Herbalife Protein Bake Mix - Limited Edition (480g)',
+    time: '8 minute(s) ago'
+  },
+  {
+    image: 'https://cdn.shopify.com/s/files/1/0104/2264/8887/products/Formula1SachetsSmoothChocolate.jpg?v=1663857972',
+    customerName: 'William J.',
+    location: 'VIENNA, Austria',
+    productName: 'Herbalife Formula 1 Shake - Pack of 7 Sachets',
+    time: '22 minute(s) ago'
+  },
+  {
+    image: 'https://cdn.shopify.com/s/files/1/0104/2264/8887/products/HerbalifeSustainableScoopforFormula1_ProteinDrinkMix.png?v=1715784407',
+    customerName: 'Olivia G.',
+    location: 'COPENHAGEN, Denmark',
+    productName: 'Herbalife Sustainable Scoop for Formula 1 & Protein Drink Mix',
+    time: '3 minute(s) ago'
+  }
+];
+
+
+function randomTime() {
+  return Math.floor(Math.random() * (60000 - 30000 + 1)) + 20000; // Random time between 30s to 60s
+}
+
+notifications.forEach((notification, index) => {
+  setTimeout(() => {
+    showToast(notification);
+  }, randomTime() * (index + 1));
+});
+</script>
